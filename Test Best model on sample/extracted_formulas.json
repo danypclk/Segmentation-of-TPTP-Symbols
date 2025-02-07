@@ -1,0 +1,69 @@
+{
+    "predicates": {
+        "accept_number": [
+            "accept",
+            "number"
+        ],
+        "accept_leader": [
+            "accept",
+            "leader"
+        ],
+        "accept_city": [
+            "accept",
+            "city"
+        ],
+        "accept_team": [
+            "accept",
+            "team"
+        ],
+        "less": [
+            "less"
+        ],
+        "accept_population": [
+            "accept",
+            "population"
+        ],
+        "the_agent_in_all_proposed_teams": [
+            "the",
+            "agent",
+            "all",
+            "proposed",
+            "teams"
+        ],
+        "any_agent_in_all_proposed_teams": [
+            "any",
+            "agent",
+            "all",
+            "proposed",
+            "teams"
+        ],
+        "min_number_of_proposed_agents": [
+            "min",
+            "number",
+            "proposed",
+            "agents"
+        ]
+    },
+    "constants": {
+        "true": [
+            "true"
+        ],
+        "other": [
+            "other"
+        ],
+        "native": [
+            "native"
+        ],
+        "atheist": [
+            "atheist"
+        ],
+        "christian": [
+            "christian"
+        ],
+        "suffertown": [
+            "suffer",
+            "town"
+        ]
+    },
+    "variables": {}
+}
