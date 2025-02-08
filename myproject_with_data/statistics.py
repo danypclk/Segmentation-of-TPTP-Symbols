@@ -188,7 +188,23 @@ def visualize_segmentation_and_features(stats, output_path):
     categories = list(stats.keys())[3:]  # Exclude total words count
     counts = [stats[category] for category in categories]
 
-    plt.bar(categories, counts)
+    # Define a fixed color mapping for bar chart categories
+    bar_colors = {
+        "Contains Underscore": "#1f77b4",
+        "Contains CamelStroke": "#ff7f0e",
+        "Contains Concatenation": "#2ca02c",
+        "CamelStroke and Underscore": "#d62728",
+        "Underscore and Concatenation": "#9467bd",
+        "CamelStroke and Concatenation": "#8c564b",
+        "CamelStroke and Underscore and Concatenation": "#e377c2",
+        "Atomic Words": "#7f7f7f",
+        "Uncategorized": "#bcbd22"
+    }
+
+    # Assign colors based on category
+    category_colors = [bar_colors.get(category, "#333333") for category in categories]  # Default to dark gray if not in dictionary
+
+    plt.bar(categories, counts, color=category_colors)
     plt.xticks(rotation=45, ha="right", fontsize=12)
     plt.yticks(fontsize=12)
     plt.title("Word Distribution Across Categories", fontsize=16)
