@@ -34,11 +34,11 @@ class CharLevelTokenizer:
 
 def segment_text(text, labels):
     """
-    Segment text into words based on the labels.
+    Segment text into words based on the labels, ensuring all words are in lowercase.
 
     :param text: Input string
     :param labels: List of labels corresponding to each character in the text
-    :return: List of segmented words
+    :return: List of segmented words in lowercase
     """
     words = []
     current_word = []
@@ -46,20 +46,50 @@ def segment_text(text, labels):
     for char, label in zip(text, labels):
         if label == 1:  # Start of a new word
             if current_word:
-                words.append("".join(current_word))
+                words.append("".join(current_word).lower())
             current_word = [char]
         else:  # Continuation of the current word
             current_word.append(char)
 
     # Add the last word if any
     if current_word:
-        words.append("".join(current_word))
+        words.append("".join(current_word).lower())
 
     return words
 
+
 # Load the BERT model and tokenizer globally
-bert_model = BertForTokenClassification.from_pretrained("bert-segmentation")
-bert_tokenizer = CharLevelTokenizer()
+def load_model_and_tokenizer(
+    local_model_dir="bert-segmentation", 
+    remote_model_name="danypereira264/bert_segmentation"
+):
+    """
+    Load a fine-tuned BERT segmentation model. This function first checks if there is
+    a local folder named 'bert-segmentation' (or the name you specify).
+    If found, it loads the model from that local path.
+    Otherwise, it downloads/loads from the Hugging Face Hub.
+
+    Returns:
+        model (BertForTokenClassification): The loaded model in evaluation mode
+        tokenizer (CharLevelTokenizer): The corresponding tokenizer
+    """
+    # Initialize the custom CharLevelTokenizer
+    tokenizer = CharLevelTokenizer()
+    
+    # Check if the local model directory exists
+    if os.path.isdir(local_model_dir):
+        print(f"Loading model from local directory: {local_model_dir}")
+        model = BertForTokenClassification.from_pretrained(local_model_dir)
+    else:
+        print(f"Local directory '{local_model_dir}' not found. "
+              f"Loading model from '{remote_model_name}'.")
+        model = BertForTokenClassification.from_pretrained(remote_model_name)
+
+    model.eval()
+    return model, tokenizer
+
+# Load the model and tokenizer
+bert_model, bert_tokenizer = load_model_and_tokenizer()
 
 def infer_segmentation(model, tokenizer, input_text, max_length=128):
     """
@@ -136,7 +166,7 @@ def evaluate_segmentation(sample_file, segmented_file, output_folder, max_subwor
         total_fp = 0
         total_fn = 0
 
-        def get_ground_truth_tokens(text):
+        def get_predicted_tokens(text):
             """
             Use BERT-based segmentation to get ground truth tokens.
             """
@@ -154,15 +184,19 @@ def evaluate_segmentation(sample_file, segmented_file, output_folder, max_subwor
             out_file.write(f"--- Category: {category} ---\n")
             for i, original_string in enumerate(sample_data[category]):
                 if i >= len(segmented_data[category]):
-                    gt_tokens = get_ground_truth_tokens(original_string)
-                    out_file.write(f"  Original:     {original_string}\n")
-                    out_file.write(f"  Ground Truth: {gt_tokens}\n")
-                    out_file.write(f"  Prediction:   Missing (no tokens predicted)\n")
+                    # No ground truth available, so ground truth = []
+                    gt_tokens = []
+                    predicted_tokens = get_predicted_tokens(original_string)
+                    out_file.write(f"  Original:        {original_string}\n")
+                    out_file.write(f"  Ground Truth:    {gt_tokens}\n")
+                    out_file.write(f"  Prediction:      {predicted_tokens}\n")
                     total_fn += len(gt_tokens)
                     continue
 
-                predicted_tokens = segmented_data[category][i]
-                gt_tokens = get_ground_truth_tokens(original_string)
+                # Now ground truth comes from segmented_data,
+                # and BERT inference is our prediction:
+                gt_tokens = segmented_data[category][i]
+                predicted_tokens = get_predicted_tokens(original_string)
 
                 out_file.write(f"  Original:     {original_string}\n")
                 out_file.write(f"  Ground Truth: {gt_tokens}\n")
@@ -197,7 +231,7 @@ def evaluate_segmentation(sample_file, segmented_file, output_folder, max_subwor
                             break
 
                     if best_match is not None:
-                        subword_tp += 1
+                        subword_tp += 0.5
                         leftover_gt_list.pop(best_idx)
 
                 item_tp = exact_tp + (subword_tp/2)
@@ -258,20 +292,20 @@ def process_folders(sample_folder, segmented_folder, output_folder):
         save_metrics_json(domain_output_folder, precision, recall, f1, domain)
 
 def save_chart(output_folder, precision, recall, f1, domain):
-    """
-    Save a bar chart of precision, recall, and F1-score for the given domain.
-    """
     metrics = ['Precision', 'Recall', 'F1-Score']
     values = [precision, recall, f1]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Assign specified colors
 
-    plt.figure()
-    plt.bar(metrics, values)
+    plt.figure(figsize=(6, 4))
+    plt.bar(metrics, values, color=colors)
     plt.ylim(0, 1)
     plt.title(f"Evaluation Metrics for {domain}")
     plt.ylabel("Score")
 
+    # Save the chart
     output_path = os.path.join(output_folder, f"{domain}_metrics.png")
     plt.savefig(output_path)
+
     plt.close()
 
 def save_metrics_json(output_folder, precision, recall, f1, domain):
@@ -343,6 +377,36 @@ def calculate_global_metrics(output_folder):
 
     return global_metrics
 
+def plot_global_metrics(output_folder):
+    """
+    Reads the global metrics JSON file and plots a bar chart.
+    """
+    global_metrics_file = os.path.join(output_folder, "global_metrics.json")
+    
+    if not os.path.exists(global_metrics_file):
+        print("Global metrics file not found.")
+        return
+    
+    # Load global metrics
+    with open(global_metrics_file, 'r', encoding='utf-8') as gm_file:
+        global_metrics = json.load(gm_file)
+    
+    # Extract metric values
+    metrics = ["Precision", "Recall", "F1-Score"]
+    values = [global_metrics["average_precision"], global_metrics["average_recall"], global_metrics["average_f1_score"]]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Fixed colors for consistency
+    
+    # Plot the metrics
+    plt.figure(figsize=(8, 5))
+    plt.bar(metrics, values, color=colors)
+    plt.ylim(0, 1)
+    plt.title("Global Evaluation Metrics")
+    plt.ylabel("Score")
+    
+    # Save the chart
+    output_path = os.path.join(output_folder, "global_metrics.png")
+    plt.savefig(output_path)
+
 if __name__ == '__main__':
     sample_folder = './samples_of_each_domain'
     segmented_folder = './segmented_samples'
@@ -352,3 +416,6 @@ if __name__ == '__main__':
 
     global_metrics = calculate_global_metrics('./evaluation_charts/bert')
     print("Global Metrics:", global_metrics)
+
+    # Generate and display the global metrics graph
+    plot_global_metrics(output_folder)

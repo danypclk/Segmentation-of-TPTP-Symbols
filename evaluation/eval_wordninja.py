@@ -45,28 +45,34 @@ def evaluate_segmentation(sample_file, segmented_file, output_folder, error_marg
         total_fp = 0
         total_fn = 0
 
-        def get_ground_truth_tokens(text):
+        def get_predicted_tokens(text):
             """
             Remove underscores, then apply wordninja.
             Keep only valid English words (PyEnchant).
             """
             joined = text.replace('_', '')
             tokens = wordninja.split(joined)
-            return [word for word in tokens if d.check(word) and not word.isdigit() and len(word) > 1]
+            return [word.lower() for word in tokens if d.check(word) and not word.isdigit() and len(word) > 1]
 
         for category in ['predicates', 'constants', 'variables']:
             out_file.write(f"--- Category: {category} ---\n")
             for i, original_string in enumerate(sample_data[category]):
                 if i >= len(segmented_data[category]):
-                    gt_tokens = get_ground_truth_tokens(original_string)
-                    out_file.write(f"  Original:     {original_string}\n")
-                    out_file.write(f"  Ground Truth: {gt_tokens}\n")
-                    out_file.write(f"  Prediction:   Missing (no tokens predicted)\n")
+                    # No ground truth available for this index => ground truth = []
+                    gt_tokens = []
+                    # The WordNinja segmentation is now our prediction
+                    predicted_tokens = get_predicted_tokens(original_string)
+
+                    out_file.write(f"  Original:        {original_string}\n")
+                    out_file.write(f"  Ground Truth:    {gt_tokens}\n")
+                    out_file.write(f"  Prediction:      {predicted_tokens}\n")
                     total_fn += len(gt_tokens)
                     continue
 
-                predicted_tokens = segmented_data[category][i]
-                gt_tokens = get_ground_truth_tokens(original_string)
+                # Otherwise, ground truth comes from segmented_data
+                gt_tokens = segmented_data[category][i]
+                # WordNinja output is the "prediction"
+                predicted_tokens = get_predicted_tokens(original_string)
 
                 out_file.write(f"  Original:     {original_string}\n")
                 out_file.write(f"  Ground Truth: {gt_tokens}\n")
@@ -173,20 +179,20 @@ def process_folders(sample_folder, segmented_folder, output_folder, error_margin
         save_metrics_json(domain_output_folder, precision, recall, f1, domain)
 
 def save_chart(output_folder, precision, recall, f1, domain):
-    """
-    Save a bar chart of precision, recall, and F1-score for the given domain.
-    """
     metrics = ['Precision', 'Recall', 'F1-Score']
     values = [precision, recall, f1]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Assign specified colors
 
-    plt.figure()
-    plt.bar(metrics, values)
+    plt.figure(figsize=(6, 4))
+    plt.bar(metrics, values, color=colors)
     plt.ylim(0, 1)
     plt.title(f"Evaluation Metrics for {domain}")
     plt.ylabel("Score")
 
+    # Save the chart
     output_path = os.path.join(output_folder, f"{domain}_metrics.png")
     plt.savefig(output_path)
+
     plt.close()
 
 def save_metrics_json(output_folder, precision, recall, f1, domain):
@@ -258,6 +264,36 @@ def calculate_global_metrics(output_folder):
 
     return global_metrics
 
+def plot_global_metrics(output_folder):
+    """
+    Reads the global metrics JSON file and plots a bar chart.
+    """
+    global_metrics_file = os.path.join(output_folder, "global_metrics.json")
+    
+    if not os.path.exists(global_metrics_file):
+        print("Global metrics file not found.")
+        return
+    
+    # Load global metrics
+    with open(global_metrics_file, 'r', encoding='utf-8') as gm_file:
+        global_metrics = json.load(gm_file)
+    
+    # Extract metric values
+    metrics = ["Precision", "Recall", "F1-Score"]
+    values = [global_metrics["average_precision"], global_metrics["average_recall"], global_metrics["average_f1_score"]]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Fixed colors for consistency
+    
+    # Plot the metrics
+    plt.figure(figsize=(8, 5))
+    plt.bar(metrics, values, color=colors)
+    plt.ylim(0, 1)
+    plt.title("Global Evaluation Metrics")
+    plt.ylabel("Score")
+    
+    # Save the chart
+    output_path = os.path.join(output_folder, "global_metrics.png")
+    plt.savefig(output_path)
+
 if __name__ == '__main__':
     sample_folder = './samples_of_each_domain'
     segmented_folder = './segmented_samples'
@@ -268,3 +304,6 @@ if __name__ == '__main__':
 
     global_metrics = calculate_global_metrics(output_folder)
     print("Global Metrics:", global_metrics)
+
+    # Generate and display the global metrics graph
+    plot_global_metrics(output_folder)

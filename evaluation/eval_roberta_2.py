@@ -14,50 +14,33 @@ from transformers import RobertaConfig
 MODEL_DIR = "./roberta-segmentation_2"
 HUGGINGFACE_MODEL_NAME = "danypereira264/roberta-segmentation_2"
 
-# Debugging: Check if the directory exists
-if os.path.exists(MODEL_DIR):
-    print(f"✅ Model directory exists: {MODEL_DIR}")
-else:
-    print(f"❌ Model directory is MISSING: {MODEL_DIR}")
+def load_roberta_model_and_tokenizer(local_model_dir=MODEL_DIR, remote_model_name=HUGGINGFACE_MODEL_NAME):
+    """
+    Load a fine-tuned RoBERTa segmentation model.
+    - If a local model exists in `local_model_dir`, it loads from there.
+    - If not, it loads directly from Hugging Face cache (without copying to `local_model_dir`).
 
-# Debugging: Check if model.safetensors exists instead of pytorch_model.bin
-if os.path.exists(os.path.join(MODEL_DIR, "model.safetensors")):
-    print(f"✅ Found model.safetensors in {MODEL_DIR}")
-    model_file = "model.safetensors"
-elif os.path.exists(os.path.join(MODEL_DIR, "pytorch_model.bin")):
-    print(f"✅ Found pytorch_model.bin in {MODEL_DIR}")
-    model_file = "pytorch_model.bin"
-else:
-    print(f"❌ No valid model file found in {MODEL_DIR}, downloading...")
+    Returns:
+        model (RobertaForTokenClassification): The loaded model in evaluation mode.
+        tokenizer (RobertaTokenizer): The corresponding tokenizer.
+    """
+    # Check if local model exists
+    if os.path.isdir(local_model_dir):
+        print(f" Loading model from local directory: {local_model_dir}")
+        model_path = local_model_dir
+    else:
+        print(f" Local model not found. Using Hugging Face cache: {remote_model_name}")
+        model_path = remote_model_name  # Use Hugging Face directly without saving
 
-    # Download model and tokenizer
-    model = RobertaForTokenClassification.from_pretrained(HUGGINGFACE_MODEL_NAME)
-    tokenizer = RobertaTokenizer.from_pretrained(HUGGINGFACE_MODEL_NAME)
+    # Load model and tokenizer
+    model = RobertaForTokenClassification.from_pretrained(model_path)
+    tokenizer = RobertaTokenizer.from_pretrained(model_path)
 
-    # Save model in `safetensors` format
-    model.save_pretrained(MODEL_DIR, safe_serialization=True)
-    tokenizer.save_pretrained(MODEL_DIR)
+    model.eval()  # Set model to evaluation mode
+    return model, tokenizer
 
-    print(f"✅ Model downloaded and saved in '{MODEL_DIR}'.")
-    model_file = "model.safetensors"
-
-# Load model configuration
-config = RobertaConfig.from_pretrained(MODEL_DIR)
-
-# Load model state dict based on format
-if model_file == "model.safetensors":
-    print(f"✅ Loading model weights from {MODEL_DIR}/model.safetensors")
-    state_dict = load_file(os.path.join(MODEL_DIR, "model.safetensors"))
-else:
-    print(f"✅ Loading model weights from {MODEL_DIR}/pytorch_model.bin")
-    state_dict = torch.load(os.path.join(MODEL_DIR, "pytorch_model.bin"), map_location="cpu")
-
-# Initialize model
-model = RobertaForTokenClassification(config)
-model.load_state_dict(state_dict)
-
-# Load tokenizer
-tokenizer = RobertaTokenizer.from_pretrained(MODEL_DIR)
+# 🔹 Load the RoBERTa model and tokenizer globally
+roberta_model, roberta_tokenizer = load_roberta_model_and_tokenizer()
 
 # Initialize PyEnchant English dictionary
 d = enchant.Dict("en_US")
@@ -93,6 +76,7 @@ def predict_labels(phrase, model, tokenizer):
     def segment_text(text, labels):
         words, current_word = [], []
         for char, label in zip(text, labels):
+            char = char.lower()  # Convert character to lowercase
             if label == 1:
                 if current_word:
                     words.append("".join(current_word))
@@ -102,7 +86,7 @@ def predict_labels(phrase, model, tokenizer):
         if current_word:
             words.append("".join(current_word))
         # Remove special characters including underscores explicitly
-        words = [re.sub(r'[^a-zA-Z]', '', word) for word in words if len(re.sub(r'[^a-zA-Z]', '', word)) > 1]
+        words = [re.sub(r'[^a-zA-Z]', '', word) for word in words if len(re.sub(r'[^a-zA-Z]', '', word)) > 1 and d.check(word)]
         return [word for word in words if word]  # Remove empty strings
     
     return segment_text(phrase, preds)
@@ -133,15 +117,19 @@ def evaluate_segmentation(sample_file, segmented_file, output_folder, max_subwor
             out_file.write(f"--- Category: {category} ---\n")
             for i, original_string in enumerate(sample_data[category]):
                 if i >= len(segmented_data[category]):
-                    gt_tokens = predict_labels(original_string, model, tokenizer)
-                    out_file.write(f"  Original:     {original_string}\n")
-                    out_file.write(f"  Ground Truth: {gt_tokens}\n")
-                    out_file.write(f"  Prediction:   Missing (no tokens predicted)\n")
+                    # No ground truth available, so ground truth = []
+                    gt_tokens = []
+                    predicted_tokens = predict_labels(original_string, roberta_model, roberta_tokenizer)
+                    out_file.write(f"  Original:        {original_string}\n")
+                    out_file.write(f"  Ground Truth:    {gt_tokens}\n")
+                    out_file.write(f"  Prediction:      {predicted_tokens}\n")
                     total_fn += len(gt_tokens)
                     continue
-                
-                predicted_tokens = segmented_data[category][i]
-                gt_tokens = predict_labels(original_string, model, tokenizer)
+
+                # Now ground truth comes from segmented_data,
+                # and BERT inference is our prediction:
+                gt_tokens = segmented_data[category][i]
+                predicted_tokens = predict_labels(original_string, roberta_model, roberta_tokenizer)
 
                 out_file.write(f"  Original:     {original_string}\n")
                 out_file.write(f"  Ground Truth: {gt_tokens}\n")
@@ -213,20 +201,20 @@ def process_folders(sample_folder, segmented_folder, output_folder):
         save_metrics_json(domain_output_folder, precision, recall, f1, domain)
 
 def save_chart(output_folder, precision, recall, f1, domain):
-    """
-    Save a bar chart of precision, recall, and F1-score for the given domain.
-    """
     metrics = ['Precision', 'Recall', 'F1-Score']
     values = [precision, recall, f1]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Assign specified colors
 
-    plt.figure()
-    plt.bar(metrics, values)
+    plt.figure(figsize=(6, 4))
+    plt.bar(metrics, values, color=colors)
     plt.ylim(0, 1)
     plt.title(f"Evaluation Metrics for {domain}")
     plt.ylabel("Score")
 
+    # Save the chart
     output_path = os.path.join(output_folder, f"{domain}_metrics.png")
     plt.savefig(output_path)
+
     plt.close()
 
 def save_metrics_json(output_folder, precision, recall, f1, domain):
@@ -298,6 +286,36 @@ def calculate_global_metrics(output_folder):
 
     return global_metrics
 
+def plot_global_metrics(output_folder):
+    """
+    Reads the global metrics JSON file and plots a bar chart.
+    """
+    global_metrics_file = os.path.join(output_folder, "global_metrics.json")
+    
+    if not os.path.exists(global_metrics_file):
+        print("Global metrics file not found.")
+        return
+    
+    # Load global metrics
+    with open(global_metrics_file, 'r', encoding='utf-8') as gm_file:
+        global_metrics = json.load(gm_file)
+    
+    # Extract metric values
+    metrics = ["Precision", "Recall", "F1-Score"]
+    values = [global_metrics["average_precision"], global_metrics["average_recall"], global_metrics["average_f1_score"]]
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c']  # Fixed colors for consistency
+    
+    # Plot the metrics
+    plt.figure(figsize=(8, 5))
+    plt.bar(metrics, values, color=colors)
+    plt.ylim(0, 1)
+    plt.title("Global Evaluation Metrics")
+    plt.ylabel("Score")
+    
+    # Save the chart
+    output_path = os.path.join(output_folder, "global_metrics.png")
+    plt.savefig(output_path)
+
 if __name__ == '__main__':
     sample_folder = './samples_of_each_domain'
     segmented_folder = './segmented_samples'
@@ -307,3 +325,6 @@ if __name__ == '__main__':
 
     global_metrics = calculate_global_metrics('./evaluation_charts/roberta_2')
     print("Global Metrics:", global_metrics)
+
+    # Generate and display the global metrics graph
+    plot_global_metrics(output_folder)

@@ -1,7 +1,7 @@
 import torch
 from transformers import BertForTokenClassification
 
-# Define the CharLevelTokenizer class
+# Define the CharLevelTokenizer class (as provided in your code)
 class CharLevelTokenizer:
     def __init__(self):
         self.vocab = {chr(i): i - 32 for i in range(32, 127)}  # ASCII characters
@@ -20,34 +20,37 @@ class CharLevelTokenizer:
             seq + [self.pad_token_id] * (max_length - len(seq)) for seq in sequences
         ]
 
-# Define the segmentation function
-
-def segment_text(text, labels):
+def load_model_and_tokenizer(
+    local_model_dir="bert-segmentation", 
+    remote_model_name="danypereira264/bert-segmentation_2"
+):
     """
-    Segment text into words based on the labels.
+    Load a fine-tuned BERT segmentation model. This function first checks if there is
+    a local folder named 'bert-segmentation' (or the name you specify).
+    If found, it loads the model from that local path.
+    Otherwise, it downloads/loads from the Hugging Face Hub: 'danypereira264/bert-segmentation_2'.
 
-    :param text: Input string
-    :param labels: List of labels corresponding to each character in the text
-    :return: List of segmented words
+    Returns:
+        model (BertForTokenClassification): The loaded model in evaluation mode
+        tokenizer (CharLevelTokenizer): The corresponding tokenizer
     """
-    words = []
-    current_word = []
+    # Initialize the custom CharLevelTokenizer
+    tokenizer = CharLevelTokenizer()
+    
+    # Check if the local model directory exists
+    if os.path.isdir(local_model_dir):
+        # Load model from local directory
+        print(f"Loading model from local directory: {local_model_dir}")
+        model = BertForTokenClassification.from_pretrained(local_model_dir)
+    else:
+        # Otherwise, load model from Hugging Face Hub
+        print(f"Local directory '{local_model_dir}' not found. "
+              f"Loading model from '{remote_model_name}'.")
+        model = BertForTokenClassification.from_pretrained(remote_model_name)
+    
+    model.eval()
+    return model, tokenizer
 
-    for char, label in zip(text, labels):
-        if label == 1:  # Start of a new word
-            if current_word:
-                words.append("".join(current_word))
-            current_word = [char]
-        else:  # Continuation of the current word
-            current_word.append(char)
-
-    # Add the last word if any
-    if current_word:
-        words.append("".join(current_word))
-
-    return words
-
-# Define the inference function
 def infer_segmentation(model, tokenizer, input_text, max_length=128):
     """
     Perform inference on a given input string to predict segmentation labels.
@@ -78,11 +81,9 @@ def infer_segmentation(model, tokenizer, input_text, max_length=128):
     labels = preds[:len(input_text)]
     return labels.tolist()
 
-# Main program for inference
 if __name__ == "__main__":
-    # Load the model
-    model = BertForTokenClassification.from_pretrained("bert-segmentation")
-    tokenizer = CharLevelTokenizer()  # Ensure this matches the tokenizer used during training
+    # Load the model and tokenizer
+    model, tokenizer = load_model_and_tokenizer()
 
     # Input text for testing
     test_phrase = input("Enter a concatenated string for segmentation: ").strip()
@@ -90,10 +91,6 @@ if __name__ == "__main__":
     # Perform inference
     predicted_labels = infer_segmentation(model, tokenizer, test_phrase)
 
-    # Segment text based on labels
-    segmented_words = segment_text(test_phrase, predicted_labels)
-
     # Display the result
     print(f"Input: {test_phrase}")
     print(f"Predicted Labels: {predicted_labels}")
-    print(f"Segmented Words: {segmented_words}")
