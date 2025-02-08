@@ -1,5 +1,17 @@
 {
     "predicates": {
+        "ifeq3": [
+            "if",
+            "eq"
+        ],
+        "ifeq2": [
+            "if",
+            "eq"
+        ],
+        "ifeq": [
+            "if",
+            "eq"
+        ],
         "accept_number": [
             "accept",
             "number"
@@ -26,6 +38,7 @@
         "the_agent_in_all_proposed_teams": [
             "the",
             "agent",
+            "in",
             "all",
             "proposed",
             "teams"
@@ -33,6 +46,7 @@
         "any_agent_in_all_proposed_teams": [
             "any",
             "agent",
+            "in",
             "all",
             "proposed",
             "teams"
@@ -40,6 +54,7 @@
         "min_number_of_proposed_agents": [
             "min",
             "number",
+            "of",
             "proposed",
             "agents"
         ]
@@ -55,7 +70,7 @@
             "native"
         ],
         "atheist": [
-            "atheist"
+            "theist"
         ],
         "christian": [
             "christian"
