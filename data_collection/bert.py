@@ -78,7 +78,7 @@ class SegmentationDataset(Dataset):
 # Hyperparameters
 max_length = 128
 batch_size = 16
-epochs = 15
+epochs = 30
 lr = 5e-5
 
 # Initialize tokenizer and dataset
