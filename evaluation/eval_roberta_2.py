@@ -12,7 +12,7 @@ from safetensors.torch import load_file
 from transformers import RobertaConfig
 
 MODEL_DIR = "./roberta-segmentation_2"
-HUGGINGFACE_MODEL_NAME = "danypereira264/roberta-segmentation_2"  # Replace with actual model repo
+HUGGINGFACE_MODEL_NAME = "danypereira264/roberta-segmentation_2"
 
 # Debugging: Check if the directory exists
 if os.path.exists(MODEL_DIR):
