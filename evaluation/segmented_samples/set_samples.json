@@ -1,0 +1,45 @@
+{
+  "predicates": [
+    ["inclusion","comparable"],
+    ["increasing"],
+    ["inductive"],
+    ["initial","segment"],
+    ["inverse","image"],
+    ["inverse","predicate"],
+    ["isomorphism"],
+    ["non","ordered","pair"],
+    ["not","equal"],
+    ["not","homomorphism"],
+    ["not","homomorphism"],
+    ["not","subclass","element"],
+    ["not","subfunction"],
+    ["relation","composition"],
+    ["relation","empty","yielding"],
+    ["relation","like"],
+    ["relation","ring"],
+    ["relation","type"],
+    ["single","valued"],
+    ["unordered","pair"]
+  ],
+  "constants": [
+       [ "domain"],
+        ["function"],
+        ["range"],
+        ["another","function"],
+        ["application","function"],
+        ["element"],
+        ["element","of"],
+        ["element","relation"],
+        ["empty","set"],
+        ["equal","set","predicate"],
+        ["function"],
+        ["identity","relation"],
+        ["subset","predicate"],
+        ["subset","relation"],
+        ["successor","relation"]
+  ],
+  "variables": [
+[],
+[]
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "predicates": [
+       ["cardinality","at","time"],
+       ["composite","role","entry"],
+       ["disbanding","rate"],
+       ["finite","set"],
+        ["first","move"],
+        ["founding","rate"],
+        ["founding","time"],
+        ["fragile","position"],
+        ["greater","or","equal"],
+        ["has","elaborated","routines"],
+        ["number","of","organizations"],
+        ["number","of","routines"],
+        ["observational","period"],
+        ["organisation","at","time"],
+        ["robust","position"],
+        ["selection","favors"],
+        ["single","role","entry"],
+        ["start","time"],
+        ["stock","of","knowledge"]
+  ],
+  "constants": [
+       ["less","equal"]
+  ],
+  "variables": [
+[],
+[]
+  ]
+}

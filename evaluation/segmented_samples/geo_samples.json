@@ -1,0 +1,30 @@
+{
+  "predicates": [
+["apart","point","and","line"],
+["at","the","same","time"],
+["case","distinction"],
+["construct","angle"],
+["equally","directed","lines"],
+["equally","directed","opposite","lines"],
+["incident","point","and","line"],
+["parallel","lines"],
+["parallel","through","point"],
+["right","angle"],
+["right","apart","point"],
+["right","convergent","lines"],
+["underlying","curve"],
+["unequally","directed","lines"],
+["unequally","directed","opposite","lines"]
+  ],
+  "constants": [
+["invertible"],
+ ["iterate"],
+ ["lower","dimension","point"],
+ ["row","vector"],
+ ["vector","add"]
+  ],
+  "variables": [
+[],
+[]
+  ]
+}

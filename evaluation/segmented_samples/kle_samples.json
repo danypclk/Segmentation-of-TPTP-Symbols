@@ -1,0 +1,18 @@
+{
+  "predicates": [
+    ["backward","diamond"],
+    ["domain","difference"],
+        ["forward","box"],
+        ["forward","diamond"],
+        ["star"],
+        ["strong","iteration"]
+  ],
+  "constants": [
+["true"],
+        ["zero"]
+  ],
+  "variables": [
+[],
+        []
+  ]
+}

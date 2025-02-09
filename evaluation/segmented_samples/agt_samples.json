@@ -1,0 +1,25 @@
+{
+  "predicates": [
+    [ "any", "agent", "in", "all", "proposed", "teams" ],
+    [ "min", "number", "of", "proposed", "agents" ],
+    [ "the", "agent", "not", "in", "any", "proposed", "teams" ],
+    [ "the", "agent", "in", "all", "proposed", "teams" ]
+  ],
+  "constants": [
+    [ "suffer", "government" ],
+    [ "country", "humanitarian", "organization" ],
+    [ "christian", "country", "humanitarian", "organization" ],
+    [ "country", "medical", "organization" ],
+    [ "christian", "suffer", "humanitarian", "organization" ],
+    [],
+    [],
+    [ "event" ],
+    [ "deduced" ],
+    [ "suffer", "government" ]
+  ],
+  "variables": [
+    [  ],
+    [  ],
+    [  ]
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "predicates": [
+    ["cheese","vegetable","topping"],
+    ["chicken","topping"],
+    ["country"],
+    ["deep","pan","base"],
+    ["domain","concept"],
+    ["fiorentina"],
+    ["fish","topping"],
+    ["hot"],
+    ["hot","green","pepper","topping"],
+    ["hot","spiced","beef","topping"],
+    ["ice","cream"],
+    ["interesting","pizza"],
+    ["jalapeno","pepper","topping"],
+    ["mushroom"],
+    ["mushroom","topping"],
+    ["named","pizza"],
+    ["napoletana"],
+    ["non","vegetarian","pizza"],
+    ["nut","topping"],
+    ["olive","topping"],
+    ["onion","topping"],
+    ["real","italian","pizza"],
+    ["red","onion","topping"],
+    ["rocket","topping"]
+  ],
+  "constants": [
+    ["member"],
+    ["member","list"],
+    ["boolean"],
+    ["decimal"],
+    ["uinteger"],
+    ["non","negative","integer"]
+  ],
+  "variables": [
+
+  ]
+}

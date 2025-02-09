@@ -1,0 +1,17 @@
+{
+  "predicates": [
+    ["cell"],
+    ["has", "part"],
+    ["cell"],
+    ["living", "entity"]
+  ],
+  "constants": [
+    ["axiom"],
+    ["cell"],
+    ["ask"]
+  ],
+  "variables": [
+    [],
+    []
+  ]
+}

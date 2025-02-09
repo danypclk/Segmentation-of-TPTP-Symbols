@@ -1,0 +1,27 @@
+{
+  "predicates": [
+    ["select"],
+    ["child","of"],
+    ["child","with","parent"],
+    ["exists"],
+    ["relation","exists"],
+   [ "parent","with","sons","only"],
+    ["hand","at"],
+    ["has","parts"],
+    ["female","child","of"]
+  ],
+  "constants": [
+    ["depth","limit"],
+    ["filter"],
+    ["pigeon","in","hole"],
+    ["time","limit"]
+  ],
+  "variables": [
+    ["another","place"],
+   [ "big","part"],
+    ["number","of","mid","parts"],
+   [ "number","of","small","parts"],
+    ["small","part"],
+    ["one","place"]
+  ]
+}

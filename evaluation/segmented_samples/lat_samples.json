@@ -1,0 +1,23 @@
+{
+  "predicates": [
+    ["element"],
+    ["element","of"],
+    ["fixed","point","of"],
+    ["function"],
+        ["lower","bound","of","in"],
+       [ "less","equals"],
+       [ "complement"],
+        ["unique","complement"]
+  ],
+  "constants": [
+    ["product","type","unity"],
+    ["complete","Lattice"],
+    ["partial","order"],
+    ["empty","set"],
+    ["product","type","unit"]
+  ],
+  "variables": [
+[],
+[]
+  ]
+}

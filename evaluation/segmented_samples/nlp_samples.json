@@ -1,0 +1,18 @@
+{
+  "predicates": [
+    ["actual","world"],
+    ["accessible","world"],
+    ["desire","want"],
+    ["hollywood","place","name"],
+    ["shake","beverage"],
+    ["think","believe","consider"],
+    ["substance","matter"]
+  ],
+  "constants": [
+         ["true"]
+  ],
+  "variables": [
+        [],
+        []
+  ]
+}

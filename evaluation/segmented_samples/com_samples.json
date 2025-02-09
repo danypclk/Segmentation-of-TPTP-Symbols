@@ -1,0 +1,34 @@
+{
+  "predicates": [
+    [ "main", "subset" ],
+    [ "check" ],
+    [ "pair" ],
+    [ "bind" ],
+    [ "algorithm" ],
+    [ "is", "terminating" ],
+    [ "get", "some", "type" ],
+    [ "left", "child", "of" ],
+    [ "siblings" ],
+    [ "failure", "node" ]
+  ],
+  "constants": [
+    [ "empty", "set" ],
+    [ "goal", "is", "there", "an", "empty", "node" ],
+    [ "rewrite", "in", "reflexive", "rewrite" ],
+    [ "left", "and", "right", "are", "siblings" ],
+    [ "conditional", "success" ],
+    [ "definition" ],
+    [ "hypothesis" ],
+    [ "deciding", "algorithm" ]
+  ],
+  "variables": [
+    [ "start", "state" ],
+    [ "allowed" ],
+    [ "intermediate", "state" ],
+    [ "result" ],
+    [],
+    [],
+    [ "condition" ],
+    ["out"]
+  ]
+}

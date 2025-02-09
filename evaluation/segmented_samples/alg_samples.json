@@ -1,0 +1,27 @@
+{
+  "predicates": [
+    [ "polynomial", "polynomial", "induct"],
+    [ "fundamental", "theorem", "algebra", "mirabelle", "bound", "exists"],
+    [ "class", "Ring", "and", "Field", "ring"],
+    [ "class", "ordered", "group", "ordered", "cancel", "semi", "group", "add" ],
+    [ "linkup", "set", "collect", "mono" ],
+    [ "Series", "series","summable", "comparison", "test" ]
+  ],
+  "constants": [
+    [ "int", "ring", "and", "field", "if" ],
+    [ "class", "semi", "ring", "semi", "ring", "rules" ],
+    [  "complex", "complex", "ordered", "group" ],
+    [],
+    [  "real", "real", "ring", "and", "field", "semi", "ring"],
+    [  "add", "left", "cancel" ],
+    [  "ring", "simps"],
+    [  "polynomial", "ring", "and", "field", "ordered", "ring" ],
+    [  "zero", "less", "power", "number", "of"]
+  ],
+  "variables": [
+    [  "top" ],
+    [  "bot" ],
+    [  "inverse" ],
+    [  "open" ]
+  ]
+}

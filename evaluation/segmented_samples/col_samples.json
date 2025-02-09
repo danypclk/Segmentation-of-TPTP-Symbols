@@ -1,0 +1,31 @@
+{
+  "predicates": [
+    [ "compatible" ],
+    [ "common", "bird" ],
+    [ "union" ],
+    [ "weak", "fixed", "point" ],
+    [ "image" ],
+    [ "add" ],
+    [ "agreeable" ],
+    [ "order", "Union" ],
+    [ "apply" ]
+  ],
+  "constants": [
+    [ "clause" ],
+    [ "combinator" ],
+    [ "pairwise", "application" ],
+    [ "prove", "there", "exists", "happy", "bird" ],
+    [ "definition" ],
+    [ "agreeable" ],
+    [ "strong", "fixpoint" ],
+    [ "prove", "happiness" ],
+    [ "prove", "the", "bird", "exists" ],
+    [ "mocking", "bird", "exists" ],
+    [ "contract" ],
+    [ "prove", "all", "fond", "of", "another" ]
+  ],
+  "variables": [
+    [],
+    [ "strong", "fixed", "point" ]
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "predicates": [
+    "continuous","function","from","onto",
+    "group","isomorphism","from","to",
+    "locally","compact","top","space",
+    "member","of",
+    "path","from","to","in",
+    "alpha","hat",
+    "an","open","function","from","onto",
+    "apply",
+    "basis",
+    "boundary",
+    "closed",
+    "closed","in",
+    "closure",
+    "coerce","to","class",
+    "connected","set",
+    "disjoint",
+    "element","of","collection",
+    "element","of","set",
+    "equal","sets",        
+    "intersection","of","members",
+    "intersection","of","sets",
+    "isomorphic","groups",
+    "the","diagonal","top",
+    "the","ordered","pair",
+    "the","product","of",
+    "the","product","top","space","of",
+    "the","product","top","space","over",
+    "the","projection","function"
+  ],
+  "constants": [
+    ["empty","set"],
+    ["yellow"],
+    ["boole"]
+  ],
+  "variables": [
+[],
+[],
+[]
+  ]
+}

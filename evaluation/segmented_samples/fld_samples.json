@@ -1,0 +1,24 @@
+{
+  "predicates": [
+    [ "add" ],
+    [ "additive","inverse" ],
+    [ "defined" ],
+    [ "equalish" ],
+    [ "less","or","equal" ],
+    [ "multiplicative", "inverse" ],
+    [ "multiply" ],
+    [ "product" ],
+    [ "sum" ]
+  ],
+  "constants": [
+    [ "additive","identity" ],
+    [],
+    [],
+    [],
+    [ "multiplicative","identity" ]
+  ],
+  "variables": [
+    [],
+    []
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "predicates": [
+        ["action","of"],
+        ["attribute"],
+        ["attribute","of"],
+        ["can","be","limited","by"],
+        ["can","be","understood","in","terms","of"],
+        ["exists"],
+        ["exists","in"],
+        ["have","nothing","in","common"],
+        ["idea","of"],
+        ["in","itself"],
+        ["is","method","action"],
+        ["is","method","existence"],
+        ["is","the"],
+        ["knowledge","of","Cause"],
+        ["knowledge","of","effect"],
+        ["modification"],
+        ["nature","can","only","by","existence"],
+        ["self","caused"],
+        ["true","idea"]
+  ],
+  "constants": [
+        ["god"],
+        ["greater","than"],
+        ["none","greater"]
+  ],
+  "variables": [
+[],
+[]
+  ]
+}

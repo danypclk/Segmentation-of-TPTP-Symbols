@@ -1,0 +1,25 @@
+{
+  "predicates": [
+        ["an","element"],
+        ["an","isomorphism"],
+        ["another","inverse"],
+        ["apply","to","two","arguments"],
+        ["element","in"],
+        ["equalish"],
+        ["greater"],
+        ["greatest","lower","bound"],
+        ["not","identity"],
+        ["not","power","of"],
+       [ "not","right","identity"],
+       [ "subgroup","member"]
+  ],
+  "constants": [
+["another","identity"],
+["left","zero"],
+["the","element"]
+  ],
+  "variables": [
+ [],
+   []
+  ]
+}

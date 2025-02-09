@@ -1,0 +1,19 @@
+{
+  "predicates": [
+"shortest","path",
+        "tail","of",
+        "length","of",
+        "less","or","equal",
+        "head","of",
+        "shortest","path"
+  ],
+  "constants": [
+    "sequential","pairs",
+    "triangles",
+    "edges"
+  ],
+  "variables": [
+"in","these",
+    "things"
+  ]
+}

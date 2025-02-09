@@ -1,0 +1,38 @@
+{
+  "predicates": [
+    ["apply","as","element"],
+    ["apply","binary"],
+    ["apply","binary","as","element"],
+    ["apply","map"],
+    ["apply","on","set","and","struct"],
+    ["apply","on","structs"],
+   [ "are","equipotent"],
+    ["being","limit","ordinal"],
+   [ "empty","carrier"],
+    ["empty","carrier","subset"],
+    ["epsilon","connected"],
+    ["epsilon","transitive"],
+  [  "function","image"],
+    ["function","inverse"],
+    ["is","antisymmetric","in"],
+   [ "is","connected","in"],
+    ["is","eventually","in"],
+    ["nowhere","dense"],
+    ["topological","space"],
+    ["topstr","closure"],
+    ["transfinite","sequence"],
+    ["transitive"],
+    ["trivial","carrier"],
+    ["well","founded","relation"],
+    ["well","ordering"],
+    ["well","orders"]
+  ],
+  "constants": [
+    ["omega"],
+   ["positive","rationals"]
+  ],
+  "variables": [
+[],
+[]
+  ]
+}

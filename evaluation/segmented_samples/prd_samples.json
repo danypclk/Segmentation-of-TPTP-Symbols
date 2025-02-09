@@ -1,0 +1,25 @@
+{
+  "predicates": [
+    ["america","nwine"],
+    ["dry","wine"],
+    ["french","wine"],
+    ["has","body"],
+  ["has","color"],
+  ["has","flavor"],
+  ["has","maker"],
+  ["has","sugar"],
+  ["sweet","wine"],
+  ["table","wine"],
+  ["texas","wine"],
+  ["vintage"],
+  ["vintage","year"],
+  ["wine","descriptor"],
+  ["wine","flavor"]
+  ],
+  "constants": [
+
+  ],
+  "variables": [
+
+  ]
+}

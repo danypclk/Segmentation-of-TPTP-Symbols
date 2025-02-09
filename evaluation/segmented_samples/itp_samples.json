@@ -1,0 +1,25 @@
+{
+  "predicates": [
+  ["relation","strict","linear","order"],
+  ["topology","closed","in"],
+  ["words","bit","count","up","to"],
+  ["words","bit","field","insert"],
+  ["binary","float","exponent"],
+  ["binary","float","compare_2E2"],
+  ["binary","float","bottom"],
+  ["binary","float","is","infinite"],
+  ["binary","float","is","finite"]
+  ],
+  "constants": [
+    ["arithmetic"],
+    ["binary","check","for","signalling"],
+    ["binary","infinity"],
+    ["bit","string","insert"],
+    ["cardinal","list"],
+    ["integer","word","word","mod"]
+  ],
+  "variables": [
+   [ "under","flow","after","rounding"],
+    ["index","too","large"]
+  ]
+}

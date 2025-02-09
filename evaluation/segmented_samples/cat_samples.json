@@ -1,0 +1,26 @@
+{
+  "predicates": [
+    [ "defined" ],
+    [ "compose" ],
+    [ "domain" ],
+    [ "codomain" ]
+  ],
+  "constants": [
+    [ "domain", "codomain", "composition" ],
+    [ "assume", "exists" ],
+    [ "equivalence", "implies", "existence" ],
+    [ "prove", "equals" ],
+    [ "cancellation", "for", "compose" ],
+    [ "prove", "domain", "of", "is"],
+    [ "subset" ],
+    [ "domain", "of", "exists" ],
+    [ "symmetry" ],
+    [ "prove", "equals" ],
+    [ "equal", "things", "exist" ]
+  ],
+  "variables": [
+    [],
+    [],
+    []
+  ]
+}
