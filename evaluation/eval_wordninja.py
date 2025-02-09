@@ -117,10 +117,10 @@ def evaluate_segmentation(sample_file, segmented_file, output_folder, error_marg
 
                     if best_match is not None:
                         # Award partial match (example: 0.5 so it doesn't dominate exact matches)
-                        subword_tp += 0.5
+                        subword_tp += 1
                         leftover_gt_list.pop(best_idx)
 
-                item_tp = exact_tp + subword_tp
+                item_tp = exact_tp + (subword_tp/2)
                 item_fp = len(leftover_pred_list) - subword_tp
                 item_fn = len(leftover_gt_list)
 
@@ -294,6 +294,36 @@ def plot_global_metrics(output_folder):
     output_path = os.path.join(output_folder, "global_metrics.png")
     plt.savefig(output_path)
 
+def save_all_domain_metrics(output_folder):
+    """
+    Aggregates all domain metrics and saves them into a single JSON file.
+    """
+    all_metrics = {}
+
+    # Iterate through domain subfolders
+    for domain_folder in os.listdir(output_folder):
+        domain_path = os.path.join(output_folder, domain_folder)
+        if not os.path.isdir(domain_path):
+            continue
+
+        metrics_file = os.path.join(domain_path, f"{domain_folder}_metrics.json")
+        if not os.path.exists(metrics_file):
+            print(f"Metrics file missing for domain {domain_folder}, skipping.")
+            continue
+
+        # Load domain metrics
+        with open(metrics_file, 'r', encoding='utf-8') as mf:
+            metrics = json.load(mf)
+
+        all_metrics[domain_folder] = metrics
+
+    # Save the aggregated metrics as a JSON file
+    aggregated_metrics_file = os.path.join(output_folder, "all_domain_metrics.json")
+    with open(aggregated_metrics_file, 'w', encoding='utf-8') as all_mf:
+        json.dump(all_metrics, all_mf, indent=4)
+
+    print(f"All domain metrics saved to {aggregated_metrics_file}")
+
 if __name__ == '__main__':
     sample_folder = './samples_of_each_domain'
     segmented_folder = './segmented_samples'
@@ -307,3 +337,6 @@ if __name__ == '__main__':
 
     # Generate and display the global metrics graph
     plot_global_metrics(output_folder)
+
+    # Save all domain metrics into a single JSON file
+    save_all_domain_metrics(output_folder)
