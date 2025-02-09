@@ -1,0 +1,46 @@
+{
+  "predicates": [
+        "inclusion_comparable",
+        "increasing",
+        "inductive",
+        "initial_segment",
+        "inverse_image3",
+        "inverse_predicate",
+        "isomorphism",
+        "non_ordered_pair",
+        "not_equal",
+        "not_homomorphism1",
+        "not_homomorphism2",
+        "not_subclass_element",
+        "not_subfunction",
+        "relation_composition",
+        "relation_empty_yielding",
+        "relation_like",
+        "relation_ring",
+        "relation_type",
+        "single_valued1",
+        "unordered_pair"
+  ],
+  "constants": [
+        "a_domain",
+        "a_function",
+        "a_range",
+        "another_function",
+        "application_function",
+        "element",
+        "element_of_b",
+        "element_relation",
+        "empty_set",
+        "equal_set_predicate",
+        "function1",
+        "identity_relation",
+        "subset_predicate",
+        "subset_relation",
+        "successor_relation"
+
+  ],
+  "variables": [
+        "Xf1",
+        "Xf2"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "predicates": [
+    "a_continuous_function_from_onto",
+    "a_group_isomorphism_from_to",
+    "a_locally_compact_top_space",
+    "a_member_of",
+    "a_path_from_to_in",
+    "alpha_hat",
+    "an_open_function_from_onto",
+    "apply",
+    "basis",
+    "boundary",
+    "closed",
+    "closed_in",
+    "closure",
+    "coerce_to_class",
+    "connected_set",
+    "disjoint",
+    "element_of_collection",
+    "element_of_set",
+    "equal_sets",        
+    "intersection_of_members",
+    "intersection_of_sets",
+    "isomorphic_groups",
+    "the_diagonal_top",
+    "the_ordered_pair",
+    "the_product_of",
+    "the_product_top_space_of",
+    "the_product_top_space_over",
+    "the_projection_function"
+  ],
+  "constants": [
+    "empty_set",
+    "f2_s1_yellow17",
+    "k1_xboole_0"
+  ],
+  "variables": [
+    "H",
+    "P",
+    "S"
+  ]
+}

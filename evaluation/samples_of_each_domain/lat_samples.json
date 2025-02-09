@@ -1,0 +1,24 @@
+{
+  "predicates": [
+    "aElement0",
+    "aElementOf0",
+    "aFixedPointOf0",
+    "aFunction0",
+        "aLowerBoundOfIn0",
+        "c_lessequals",
+        "complement",
+        "unique_complement"
+  ],
+  "constants": [
+        "c_Product__Type_OUnity",
+        "c_OCompleteLattice",
+        "c_OPartialOrder",
+        "c_emptyset",
+        "tc_Product__Type_Ounit"
+
+  ],
+  "variables": [
+"X",
+        "X1"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "predicates": [
+    "backward_diamond",
+    "domain_difference",
+        "forward_box",
+        "forward_diamond",
+        "star",
+        "strong_iteration"
+  ],
+  "constants": [
+       "true",
+        "zero"
+  ],
+  "variables": [
+        "A",
+        "B"
+  ]
+}

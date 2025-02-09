@@ -1,0 +1,32 @@
+{
+  "predicates": [
+        "actionOf",
+        "attribute",
+        "attributeOf",
+        "canBeLimitedBy",
+        "canBeUnderstoodInTermsOf",
+        "exists",
+        "existsIn",
+        "haveNothingInCommon",
+        "ideaOf",
+        "inItself",
+        "isMethodAction",
+        "isMethodExistence",
+        "is_the",
+        "knowledgeOfACause",
+        "knowledgeOfEffect",
+        "modification",
+        "natureCanOnlyByExistence",
+        "selfCaused",
+        "trueIdea"
+  ],
+  "constants": [
+        "god",
+        "greater_than",
+        "none_greater"
+  ],
+  "variables": [
+    "F",
+    "G"
+  ]
+}

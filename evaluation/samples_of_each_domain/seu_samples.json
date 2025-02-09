@@ -1,0 +1,38 @@
+{
+  "predicates": [
+    "apply_as_element",
+    "apply_binary",
+    "apply_binary_as_element",
+    "apply_map",
+    "apply_on_set_and_struct",
+    "apply_on_structs",
+    "are_equipotent",
+    "being_limit_ordinal",
+    "empty_carrier",
+    "empty_carrier_subset",
+    "epsilon_connected",
+    "epsilon_transitive",
+    "function_image",
+    "function_inverse",
+    "is_antisymmetric_in",
+    "is_connected_in",
+    "is_eventually_in",
+    "nowhere_dense",
+    "topological_space",
+    "topstr_closure",
+    "transfinite_sequence",
+    "transitive",
+    "trivial_carrier",
+    "well_founded_relation",
+    "well_ordering",
+    "well_orders"
+  ],
+  "constants": [
+    "omega",
+   "positive_rationals"
+  ],
+  "variables": [
+    "A",
+    "B"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "predicates": [
+    "fn_cell_2",
+    "has_part_2"
+  ],
+  "constants": [
+    "conjecture",
+    "axiom",
+    "a_cell"
+  ],
+  "variables": [
+    "Y",
+    "X"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "predicates": [
+    "compatible",
+    "common_bird",
+    "unionE_sk1",
+    "weak_fixed_point",
+    "vimage",
+    "radd",
+    "agreeable",
+    "order_Union_sk1",
+    "apply"
+  ],
+  "constants": [
+    "clause65",
+    "combinator",
+    "pairwise_application",
+    "prove_there_exists_a_happy_bird",
+    "b_definition",
+    "agreeable1",
+    "strong_fixpoint",
+    "prove_happiness_1",
+    "prove_the_bird_exists",
+    "mocking_bird_exists",
+    "contract_K",
+    "prove_all_fond_of_another"
+  ],
+  "variables": [
+    "V_z",
+    "Strong_fixed_point"
+  ]
+}

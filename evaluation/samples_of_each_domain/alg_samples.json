@@ -1,0 +1,27 @@
+{
+    "predicates": [
+        "c_Polynomial__Polynomial__X__induct__1__1",
+        "v_Fundamental__Theorem__Algebra__Mirabelle__X__bound__exists__1",
+        "class_Ring__and__Field__ring__1",
+        "class_OrderedGroup_Opordered__cancel__semigroup__add",
+        "c_ATP__Linkup__Set__X__Collect__mono__1__1",
+        "c_Series__Series__Xsummable__comparison__test__1__1"
+    ],
+   "constants": [
+        "cls_Int__Ring__and__Field__if",
+        "cls_class__semiring_Osemiring__rules_I24_J_0",
+        "cls_Complex__Ocomplex__OrderedGroup__mult",
+        "cls_n0_0",
+        "cls_RealDef__Oreal__Ring__and__Field__semiring__0",
+        "cls_add__left__cancel_0",
+        "cls_ring_Oring__simps_I36_J_0",
+        "cls_Polynomial__Ring__and__Field_Opordered__ring",
+        "cls_zero__less__power__nat__eq__number__of_2"
+    ],
+   "variables": [
+        "V_top",
+        "V_bot",
+        "V_inverse",
+        "V_open"
+    ]
+}

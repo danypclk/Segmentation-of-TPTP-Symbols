@@ -1,0 +1,30 @@
+{
+  "predicates": [
+       "cardinality_at_time",
+       "compositeRoleEntry",
+       "disbanding_rate",
+       "finite_set",
+        "first_move",
+        "founding_rate",
+        "founding_time",
+        "fragile_position",
+        "greater_or_equal",
+        "has_elaborated_routines",
+        "number_of_organizations",
+        "number_of_routines",
+        "observational_period",
+        "organisation_at_time",
+        "robust_position",
+        "selection_favors",
+        "singleRoleEntry",
+        "start_time",
+        "stock_of_knowledge"
+  ],
+  "constants": [
+         "ssLESS_EQUAL_1000_EUR"
+  ],
+  "variables": [
+        "B",
+        "C"
+  ]
+}

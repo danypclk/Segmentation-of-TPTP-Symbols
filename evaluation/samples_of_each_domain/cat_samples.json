@@ -1,0 +1,26 @@
+{
+  "predicates": [
+    "defined",
+    "compose",
+    "domain",
+    "codomain"
+  ],
+  "constants": [
+    "domain_codomain_composition2",
+    "assume_bc_exists",
+    "equivalence_implies_existence2",
+    "prove_a_equals_b",
+    "cancellation_for_compose2",
+    "prove_domain_of_a_is_d",
+    "t5_subset",
+    "domain_of_c2_exists",
+    "symmetry_r1_iso_1",
+    "prove_c1_equals_c2",
+    "equal_things_exist"
+  ],
+  "variables": [
+    "C",
+    "E",
+    "J"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+    "predicates": [
+        "any_agent_in_all_proposed_teams",
+        "min_number_of_proposed_agents",
+        "the_agent_not_in_any_proposed_teams",
+        "the_agent_in_all_proposed_teams"
+    ],
+   "constants": [
+        "suffergovernment",
+        "muslimcountrybhumanitarianorganization",
+        "christiancountrychumanitarianorganization",
+        "countryamedicalorganization",
+        "christiansufferhumanitarianorganization",
+        "a2_2_3",
+        "a2_10_1",
+        "event_164",
+        "deduced_144",
+        "suffergovernment"
+    ],
+   "variables": [
+        "Y",
+        "L",
+        "C"
+    ]
+}

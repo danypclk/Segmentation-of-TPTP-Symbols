@@ -1,0 +1,35 @@
+{
+  "predicates": [
+    "c_Main_OsubsetI__1",
+    "vtcheck",
+    "c_Pair",
+    "vbind",
+    "algorithm",
+    "isTerminating0",
+    "vgetSomeType",
+    "left_child_of",
+    "siblings",
+    "failure_node"
+  ],
+  "constants": [
+    "c_emptyset",
+    "goal_is_there_an_empty_node",
+    "rewrite_in_reflexive_rewrite",
+    "n_left_and_n_right_are_siblings",
+    "conditional_success",
+    "definition",
+    "hypothesis_4_6",
+    "a_deciding_algorithm"
+
+  ],
+  "variables": [
+    "Start_state",
+    "V_allowed",
+    "Intermediate_state",
+    "RESULT\\n",
+    "Ve\\n",
+    "V_F",
+    "Condition",
+    "Veout"
+  ]
+}

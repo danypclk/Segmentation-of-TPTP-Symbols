@@ -1,0 +1,38 @@
+{
+  "predicates": [
+    "iCheeseVegetableTopping",
+    "iChickenTopping",
+    "iCountry",
+    "iDeepPanBase",
+    "iDomainConcept",
+    "iFiorentina",
+    "iFishTopping",
+    "iHot",
+    "iHotGreenPepperTopping",
+    "iHotSpicedBeefTopping",
+    "iIceCream",
+    "iInterestingPizza",
+    "iJalapenoPepperTopping",
+    "iMushroom",
+    "iMushroomTopping",
+    "iNamedPizza",
+    "iNapoletana",
+    "iNonVegetarianPizza",
+    "iNutTopping",
+    "iOliveTopping",
+    "iOnionTopping",
+    "iRealItalianPizza",
+    "iRedOnionTopping",
+    "iRocketTopping"
+  ],
+  "constants": [
+    "uri_skos_member",
+    "uri_skos_memberList",
+    "uri_xsd_boolean",
+    "uri_xsd_decimal",
+    "uri_xsd_integer",
+    "uri_xsd_nonNegativeInteger"
+  ],
+  "variables": [
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "predicates": [
+    "a_select3",
+    "child_of2",
+    "child_with_parent",
+    "sK1_exists_f_Z",
+    "sK1_relation_exists_F",
+    "parent_with_sons_only",
+    "hand_at",
+    "has_parts",
+    "female_child_of"
+  ],
+  "constants": [
+        "depth_limit",
+        "dv_ds1_filter",
+        "pigeon_1_in_hole_3",
+        "time_limit"
+  ],
+  "variables": [
+        "Another_place",
+        "Big_part",
+        "Number_of_mid_parts",
+        "Number_of_small_parts",
+        "Small_part",
+        "One_place"
+  ]
+}

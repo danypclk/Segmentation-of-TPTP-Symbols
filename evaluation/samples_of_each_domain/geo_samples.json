@@ -1,0 +1,32 @@
+{
+  "predicates": [
+"apart_point_and_line",
+"at_the_same_time",
+"case_distinction",
+"constructAngle",
+"equally_directed_lines",
+"equally_directed_opposite_lines",
+"incident_point_and_line",
+"parallel_lines",
+ "parallel_through_point",
+ "right_angle",
+ "right_apart_point",
+ "right_convergent_lines",
+ "underlying_curve",
+  "unequally_directed_lines",
+  "unequally_directed_opposite_lines"
+  ],
+  "constants": [
+"invertible",
+ "iterate",
+ "lower_dimension_point_1",
+ "lower_dimension_point_2",
+ "lower_dimension_point_3",
+ "rowvector",
+ "vectoru_add"
+  ],
+  "variables": [
+"Vd1418",
+ "Vd1427"
+  ]
+}

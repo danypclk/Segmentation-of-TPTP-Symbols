@@ -1,0 +1,17 @@
+{
+  "predicates": [
+    "fn_cell_2",
+    "has_part_2",
+    "cell_1",
+    "living_entity"
+  ],
+  "constants": [
+    "axiom",
+    "a_cell",
+    "ask"
+  ],
+  "variables": [
+    "Y",
+    "X"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "predicates": [
+"c_2Eset__relation_2Estrict__linear__order",
+"c_2Etopology_2Eclosed__in_2E2",
+"c_2Ewords_2Ebit__count__upto_2E2",
+"c_2Ewords_2Ebit__field__insert",
+"c_2Ebinary__ieee_2Efloat__Exponent",
+"c_2Ebinary__ieee_2Efloat__compare_2E2",
+"c_2Ebinary__ieee_2Efloat__bottom",
+"c_2Ebinary__ieee_2Efloat__is__infinite",
+"c_2Ebinary__ieee_2Efloat__is__finite"
+  ],
+  "constants": [
+    "c_2Earithmetic_2E_3E_2E0",
+    "c_2Ebinary__ieee_2Echeck__for__signalling_2E0",
+    "c_2Ebinary__ieee_2EInfinity",
+    "c_2Ebitstring_2Efield__insert",
+    "c_2Ecardinal_2Elist_2E0",
+    "c_2Einteger__word_2Eword__smod_2E0"
+  ],
+  "variables": [
+    "V3Underflow__AfterRounding_2E0",
+    "V0index_20too_20large_2E0"
+  ]
+}

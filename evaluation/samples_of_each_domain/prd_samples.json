@@ -1,0 +1,25 @@
+{
+  "predicates": [
+          "americanwine",
+          "drywine",
+          "frenchwine",
+          "hasbody",
+        "hascolor",
+        "hasflavor",
+        "hasmaker",
+        "hassugar",
+        "sweetwine",
+        "tablewine",
+        "texaswine",
+        "vintage",
+        "vintageyear",
+        "winedescriptor",
+        "wineflavor"
+  ],
+  "constants": [
+
+  ],
+  "variables": [
+
+  ]
+}

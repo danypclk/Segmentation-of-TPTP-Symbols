@@ -1,0 +1,19 @@
+{
+  "predicates": [
+"shortest_path",
+        "tail_of",
+        "length_of",
+        "less_or_equal",
+        "head_of",
+        "shortest_path"
+  ],
+  "constants": [
+    "sequential_pairs",
+    "triangles",
+    "edges"
+  ],
+  "variables": [
+    "InThese",
+    "Things"
+  ]
+}

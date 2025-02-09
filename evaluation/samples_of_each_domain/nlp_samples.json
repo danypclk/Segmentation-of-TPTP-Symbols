@@ -1,0 +1,19 @@
+{
+  "predicates": [
+       "actual_world",
+       "accessible_world",
+       "desire_want",
+       "hollywood_placename",
+       "shake_beverage",
+       "think_believe_consider",
+       "substance_matter"
+       
+  ],
+  "constants": [
+         "true"
+  ],
+  "variables": [
+        "X38",
+        "X4"
+  ]
+}

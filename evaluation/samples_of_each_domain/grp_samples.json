@@ -1,0 +1,25 @@
+{
+  "predicates": [
+"an_element",
+        "an_isomorphism",
+        "another_inverse",
+        "apply_to_two_arguments",
+        "element_in_O2",
+        "equalish",
+        "greater",
+        "greatest_lower_bound",
+        "not_identity",
+        "not_power_of",
+        "not_right_identity",
+        "subgroup_member"
+  ],
+  "constants": [
+"another_identity",
+"f_left_zero",
+"the_element"
+  ],
+  "variables": [
+    "X15",
+    "X16"
+  ]
+}

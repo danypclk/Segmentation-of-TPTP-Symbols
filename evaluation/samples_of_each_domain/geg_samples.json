@@ -1,0 +1,26 @@
+{
+  "predicates": [
+    "object",
+    "predicate",
+    "property",
+    "relation"
+  ],
+  "constants": [
+    "alpine_country",
+    "australian_Continent",
+    "landlocked_country",
+    "terrestrial_planet",
+    "the_capital_of",
+    "singapore",
+    "south_America",
+    "rio_de_Janeiro",
+    "island_country",
+    "multilingual_country",
+    "terrestrial_planet",
+    "the_capital_of"
+  ],
+  "variables": [
+    "O13",
+    "O14"
+  ]
+}
