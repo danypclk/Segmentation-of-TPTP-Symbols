@@ -39,9 +39,7 @@ class CharLevelTokenizer:
         return "".join([rev_vocab.get(i, "?") for i in ids])
 
     def pad(self, sequences, max_length):
-        return [
-            seq + [self.pad_token_id] * (max_length - len(seq)) for seq in sequences
-        ]
+        return [seq + [self.pad_token_id] * (max_length - len(seq)) for seq in sequences]
 
 # Dataset class
 class SegmentationDataset(Dataset):
@@ -60,14 +58,14 @@ class SegmentationDataset(Dataset):
 
         # Tokenize the phrase and pad to max_length
         input_ids = self.tokenizer.encode(text)
-        input_ids = input_ids[: self.max_length]
-        label = label[: self.max_length]
+        input_ids = input_ids[:self.max_length]
+        label = label[:self.max_length]
 
         input_ids = self.tokenizer.pad([input_ids], self.max_length)[0]
         label = self.tokenizer.pad([label], self.max_length)[0]
 
         # Generate attention_mask
-        attention_mask = [1 if id != self.tokenizer.pad_token_id else 0 for id in input_ids]
+        attention_mask = [1 if token_id != self.tokenizer.pad_token_id else 0 for token_id in input_ids]
 
         return {
             "input_ids": torch.tensor(input_ids, dtype=torch.long),
@@ -85,29 +83,31 @@ lr = 5e-5
 tokenizer = CharLevelTokenizer()
 dataset = SegmentationDataset(phrases, labels, tokenizer, max_length)
 
-# Split dataset
-train_data, val_data = train_test_split(dataset, test_size=0.2, random_state=42)
+# Split dataset into training and validation sets
+train_val_data, test_data = train_test_split(dataset, test_size=0.1, random_state=42)
+train_data, val_data = train_test_split(train_val_data, test_size=0.1, random_state=42)
 train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
 val_loader = DataLoader(val_data, batch_size=batch_size)
+test_loader = DataLoader(test_data, batch_size=batch_size)
 
-# Load pre-trained BERT model
+# Load pre-trained BERT model for token classification
 model = BertForTokenClassification.from_pretrained("bert-base-uncased", num_labels=2)
 model.resize_token_embeddings(len(tokenizer.vocab) + 1)
 
-# Move model to device
+# Move model to the appropriate device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-# Optimizer and loss function
+# Optimizer
 optimizer = AdamW(model.parameters(), lr=lr)
-loss_fn = torch.nn.CrossEntropyLoss()
 
-# Training loop
+# Training and validation loop
 for epoch in range(epochs):
+    # --- Training ---
     model.train()
-    total_loss = 0
+    total_train_loss = 0
 
-    for batch in tqdm(train_loader):
+    for batch in tqdm(train_loader, desc=f"Training Epoch {epoch + 1}"):
         optimizer.zero_grad()
         input_ids = batch["input_ids"].to(device)
         attention_mask = batch["attention_mask"].to(device)
@@ -118,28 +118,38 @@ for epoch in range(epochs):
         loss.backward()
         optimizer.step()
 
-        total_loss += loss.item()
+        total_train_loss += loss.item()
 
-    print(f"Epoch {epoch + 1}/{epochs}, Loss: {total_loss / len(train_loader)}")
+    avg_train_loss = total_train_loss / len(train_loader)
+    print(f"Epoch {epoch + 1}/{epochs}, Training Loss: {avg_train_loss:.4f}")
 
-# Evaluation loop
-model.eval()
-total_accuracy = 0
-total_count = 0
+    # --- Validation ---
+    model.eval()
+    total_val_loss = 0
+    total_correct = 0
+    total_tokens = 0
 
-with torch.no_grad():
-    for batch in val_loader:
-        input_ids = batch["input_ids"].to(device)
-        attention_mask = batch["attention_mask"].to(device)
-        labels = batch["labels"].to(device)
+    with torch.no_grad():
+        for batch in val_loader:
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+            labels = batch["labels"].to(device)
 
-        outputs = model(input_ids=input_ids, attention_mask=attention_mask).logits
-        preds = torch.argmax(outputs, dim=-1)
+            # Get model outputs; passing labels computes the loss
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
+            loss = outputs.loss
+            logits = outputs.logits
 
-        total_accuracy += (preds == labels).sum().item()
-        total_count += labels.numel()
+            total_val_loss += loss.item()
 
-print(f"Validation Accuracy: {total_accuracy / total_count:.4f}")
+            # Calculate accuracy
+            preds = torch.argmax(logits, dim=-1)
+            total_correct += (preds == labels).sum().item()
+            total_tokens += labels.numel()
 
-# Save the model
+    avg_val_loss = total_val_loss / len(val_loader)
+    accuracy = total_correct / total_tokens
+    print(f"Epoch {epoch + 1}/{epochs}, Validation Loss: {avg_val_loss:.4f}, Accuracy: {accuracy:.4f}")
+
+# Save the model after training
 model.save_pretrained("bert-segmentation")
