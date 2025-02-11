@@ -34,7 +34,7 @@ def extract_matches(formulas, patterns):
 
     # Patterns for quoted terms
     quoted_predicate_pattern = r"(?<=')([^'()!=,\n]+)(?='[(])"
-    quoted_constant_pattern  = r"(?<=['])(?:(?!!=)[^'(),\n]+)(?='(?!\())"
+    quoted_constant_pattern  = r"(?<=['])(?:(?!.*!=.*)[^'(),\n]+)(?='(?!\())"
 
     # Will store all quoted constants before adding them to 'constants'
     all_quoted_constants = []

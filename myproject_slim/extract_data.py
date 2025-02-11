@@ -18,7 +18,7 @@ regex_patterns = {
 
 # You could define these at the top of your script
 quoted_predicate_pattern = r"(?<=')([^'()!=,\n]+)(?='[(])"   # `'someText'(` - Quoted text followed by '('
-quoted_constant_pattern  = r"(?<=['])(?:(?!!=)[^'(),\n]+)(?='(?!\())"   # `'someText'` - Quoted text NOT followed by '('
+quoted_constant_pattern  = r"(?<=['])(?:(?!.*!=.*)[^'(),\n]+)(?='(?!\())"   # `'someText'` - Quoted text NOT followed by '('
 
 def extract_matches(formulas, patterns):
     """
